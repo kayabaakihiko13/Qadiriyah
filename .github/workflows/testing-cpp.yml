@@ -1,4 +1,4 @@
-name: Clara Test Linux Base
+name: Qadiriyah Test Linux Base
 
 on: [push, pull_request]
 
