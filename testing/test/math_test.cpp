@@ -1,5 +1,6 @@
-#include "gtest/gtest.h"
 #include "../../libs/math/math.hh"
+
+#include "gtest/gtest.h"
 
 using namespace qadiriyah;
 
@@ -93,3 +94,10 @@ TEST(PermutationTest, ZeroNumber) {
   EXPECT_EQ(expected, actual);
 }
 
+TEST(BellNum,Iterable5){
+  // this a iterable until
+  int n = 5;
+  int expected = 52;
+  int actual = bell_num(n);
+  EXPECT_EQ(expected,actual);
+}

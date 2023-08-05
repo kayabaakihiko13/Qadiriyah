@@ -20,11 +20,9 @@ T _median(std::vector<T>& arr) {
   int size_arr = arr.size();
   // for even size
   if (size_arr % 2 == 0) {
-    int cursor = size_arr / 2;
+    int cursor = size_arr / 2 - 1;
 
-    T result = arr[cursor] + arr[cursor + 1];
-
-    result /= 2;
+    T result = static_cast<float>(arr[cursor] + arr[cursor + 1]) / 2.0f;
 
     return result;
   }
