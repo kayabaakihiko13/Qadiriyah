@@ -101,3 +101,9 @@ TEST(BellNum,Iterable5){
   int actual = bell_num(n);
   EXPECT_EQ(expected,actual);
 }
+TEST (SquareValue,SquareInt){
+  int n = 4;
+  int expected = 2;
+  int actual = square_value(n);
+  EXPECT_EQ(expected,actual);
+}

@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <vector>
 
+#include "../math/math.hh"
+
 template <typename T>
 float mean(std::vector<T>& arr) {
   float result = 0;
@@ -58,4 +60,43 @@ T _mode(std::vector<T>& arr) {
   }
 
   return max_element;
+}
+
+template <typename T>
+float variance(std::vector<T>& arr) {
+  float mean_values = mean(arr);
+  float result = 0;
+  for (int i = 0; i < arr.size(); ++i) {
+    float diff = arr[i] - mean_values;
+    result += pow(diff, 2);
+  }
+  result /= arr.size();
+  return result;
+}
+
+template <typename T>
+float StandardDev(std::vector<T>& arr) {
+  float mean_value = mean(arr);
+  float result = 0;
+  for (int i = 0; i < arr.size(); ++i) {
+    float diff = pow(arr[i] - mean_value, 2);
+    result += diff;
+  }
+  result /= arr.size();
+
+  return qadiriyah::square_value(result);
+}
+
+template <typename T>
+float Covariance(std::vector<T>& arrX, std::vector<T>& arrY) {
+  float mean_x = mean(arrX);
+  float mean_y = mean(arrY);
+  float result = 0;
+  for (int i = 0; i < arrX.size(); ++i) {
+    float diffX = (arrX[i] - mean_x);
+    float diffY = (arrY[i] - mean_y);
+    result += (diffX * diffY);
+  }
+  result /= arrX.size();
+  return result;
 }

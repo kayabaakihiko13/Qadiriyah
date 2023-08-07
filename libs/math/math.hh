@@ -1,7 +1,8 @@
 #ifndef MATH_FUNCTIONS_H
 #define MATH_FUNCTIONS_H
 
-#include <cmath>
+// #include <cmath>
+#include<cmath>
 #include <initializer_list>
 #include <iostream>
 #include <vector>
@@ -58,16 +59,21 @@ t power(t number, double rank) {
 }
 
 inline int combi(int n, int k) {
+  // know the contents of the numerator,call factorial with value param n
   int numerator = calculate_factorial(n);
+  // know the contents of the denominator,call favtorial with param n and k
   int denominator = calculate_factorial(k) * calculate_factorial(n - k);
   return numerator / denominator;
 }
 
 inline int permutation(int n, int k = 0) {
+  // if value params k equal zero,k value is equal with n
   if (k == 0) {
     k = n;
   }
+  // know the contents of the numerator,call factorial with value param n
   int numerator = calculate_factorial(n);
+  // know the contents of the denominator,call favtorial with param n and k
   int denominator = calculate_factorial(n - k);
   return numerator / denominator;
 }
@@ -95,7 +101,9 @@ inline double exponent(double x) {
 
 template <typename T>
 T abs(T value) {
+  // if value less than 0,the value be negative
   if (value < 0) {
+    // this return same like -1 * value
     return -value;
   } else {
     return value;
@@ -103,8 +111,10 @@ T abs(T value) {
 }
 
 inline long int binomial(int x, int n) {
+  // binominal is a polynominal that is the sum of two monominal
   double result = 0;
   for (int k = 0; k <= n; ++k) {
+    // calculate every combination and power rank value
     result += combi(n, k) * power(x, k);
   }
   return result;
@@ -112,6 +122,12 @@ inline long int binomial(int x, int n) {
 
 template <typename T>
 double natural_log(T x) {
+  /**
+   * @brief natural logarithm is math formula
+   * from equation from Mercator' Series with base
+   * constant eular value.
+  */
+
   // euler constant value
   const double epsilon = 1e-10;
 
@@ -126,6 +142,7 @@ double natural_log(T x) {
 
 // @brief square function is to calculate
 // a square of value.
+// this function using newton raphson method (search key:Newton's Method)
 // @param x this a input value we wont calculate
 // return a result decimal number
 
@@ -148,9 +165,15 @@ float square_value(T x) {
 
 template <typename T>
 float log_base(T X, int base) {
+    /**
+   * @brief the logarithm is a mathematical function
+   * defined by equation from Mercator's series,
+   * with the base being the constant Eular's value.
+  */
   if (base < 0) {
     std::cerr << "Base value must greater than or equal to\n";
   }
+  // the calculate division of natural log param X and base
   return natural_log(X) / natural_log(base);
 }
 
@@ -159,6 +182,7 @@ double log10(T x) {
   if (x < 0) {
     std::cerr << "Value lower than 0 can't be calculate" << std::endl;
   }
+  // calculate division of natural logarith x value with 10 as base
   return natural_log(x) / natural_log(10);
 }
 

@@ -61,9 +61,11 @@ double tan(T x) {
 template <typename T>
 double distance(const std::vector<T> &a, const std::vector<T> &b) {
   double result = 0.0;
+
   for (int i = 0; i < a.size(); ++i) {
     double calculate = square_value(sum(power(a[i] - b[i])));
     result += calculate;
   }
+
   return result;
 }
