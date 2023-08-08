@@ -9,7 +9,13 @@
 
 namespace qadiriyah {
 
-// calculate the sum of a vector of numbers
+/**
+ * @brief Calculate the sum of a vector of numbers.
+ * 
+ * @tparam T The data type of the numbers.
+ * @param numbers The vector of numbers to sum.
+ * @return The sum of the numbers.
+ */
 template <typename T>
 T sum_vec(const std::vector<T> &numbers) {
   // initialize the sum to 0
@@ -22,6 +28,13 @@ T sum_vec(const std::vector<T> &numbers) {
   return result;
 }
 
+/**
+ * @brief Calculate the sum of numbers in an initializer list.
+ * 
+ * @tparam T The data type of the numbers.
+ * @param numbers The initializer list of numbers to sum.
+ * @return The sum of the numbers.
+ */
 template <typename T>
 T sum_vec(std::initializer_list<T> numbers) {
   T result = 0;
@@ -31,19 +44,36 @@ T sum_vec(std::initializer_list<T> numbers) {
   return result;
 }
 
+/**
+ * @brief Calculate the factorial of a non-negative integer.
+ * 
+ * @param number The non-negative integer.
+ * @return The factorial of the input number.
+ */
 inline int calculate_factorial(int number) {
   // check if the input value is non negaive
   if (number < 0) {
+    // return -1 for invalid input
     return -1;
   }
   // initialize the factorial to 1
   int factorial = 1;
   for (int i = 2; i <= number; ++i) {
+    // multiply factorial by each integer up to 'number'
     factorial *= i;
   }
+  // return the calculated factorial
   return factorial;
 }
 
+/**
+ * @brief Calculate the power of a number with support for negative bases and integer exponents.
+ * 
+ * @tparam T The data type of the number.
+ * @param number The base number.
+ * @param rank The exponent.
+ * @return The result of the power operation.
+ */
 template <typename t>
 t power(t number, double rank) {
   if (number < 0 && rank == static_cast<int>(rank)) {
@@ -58,6 +88,13 @@ t power(t number, double rank) {
   }
 }
 
+/**
+ * @brief Calculate combinations (n choose k).
+ * 
+ * @param n The total number of items.
+ * @param k The number of items to choose.
+ * @return The calculated combination value.
+ */
 inline int combi(int n, int k) {
   // know the contents of the numerator,call factorial with value param n
   int numerator = calculate_factorial(n);
@@ -66,6 +103,13 @@ inline int combi(int n, int k) {
   return numerator / denominator;
 }
 
+/**
+ * @brief Calculate permutations (n P k).
+ * 
+ * @param n The total number of items.
+ * @param k The number of items to choose (default is n).
+ * @return The calculated permutation value.
+ */
 inline int permutation(int n, int k = 0) {
   // if value params k equal zero,k value is equal with n
   if (k == 0) {
@@ -78,6 +122,11 @@ inline int permutation(int n, int k = 0) {
   return numerator / denominator;
 }
 
+/**
+ * @brief Calculate the value of Euler's number (e) using a Taylor series approximation.
+ * 
+ * @return The value of Euler's number.
+ */
 inline double e() {
   // the name of algorithm is talyor series
   // this variabel iterable for result be good and approach
@@ -90,6 +139,12 @@ inline double e() {
   return result;
 }
 
+/**
+ * @brief Calculate the value of e raised to the power of x.
+ * 
+ * @param x The exponent.
+ * @return The result of e^x.
+ */
 inline double exponent(double x) {
   /*
    * @brief exponent is math formula from
@@ -99,6 +154,13 @@ inline double exponent(double x) {
   return power(e(), x);
 }
 
+/**
+ * @brief Calculate the absolute value of a number.
+ * 
+ * @tparam T The data type of the value.
+ * @param value The input value.
+ * @return The absolute value of the input.
+ */
 template <typename T>
 T abs(T value) {
   // if value less than 0,the value be negative
@@ -110,6 +172,13 @@ T abs(T value) {
   }
 }
 
+/**
+ * @brief Calculate the binomial expansion of (x + 1)^n using combinations and powers.
+ * 
+ * @param x The base value.
+ * @param n The exponent.
+ * @return The result of the binomial expansion.
+ */
 inline long int binomial(int x, int n) {
   // binominal is a polynominal that is the sum of two monominal
   double result = 0;
@@ -120,6 +189,13 @@ inline long int binomial(int x, int n) {
   return result;
 }
 
+/**
+ * @brief Calculate the natural logarithm using Mercator's series approximation.
+ * 
+ * @tparam T The data type of the input.
+ * @param x The input value.
+ * @return The calculated natural logarithm.
+ */
 template <typename T>
 double natural_log(T x) {
   /**
@@ -140,12 +216,13 @@ double natural_log(T x) {
   return yn1;
 }
 
-// @brief square function is to calculate
-// a square of value.
-// this function using newton raphson method (search key:Newton's Method)
-// @param x this a input value we wont calculate
-// return a result decimal number
-
+/**
+ * @brief Calculate the square root using the Newton-Raphson method.
+ * 
+ * @tparam T The data type of the input.
+ * @param x The input value.
+ * @return The calculated square root.
+ */
 template <typename T>
 float square_value(T x) {
   // Increase the number of iterations for better accuracy
@@ -163,6 +240,14 @@ float square_value(T x) {
   return r;
 }
 
+/**
+ * @brief Calculate the logarithm with a specified base using the natural logarithm.
+ * 
+ * @tparam T The data type of the inputs.
+ * @param X The input value.
+ * @param base The desired base.
+ * @return The calculated logarithm.
+ */
 template <typename T>
 float log_base(T X, int base) {
     /**
@@ -177,6 +262,13 @@ float log_base(T X, int base) {
   return natural_log(X) / natural_log(base);
 }
 
+/**
+ * @brief Calculate the base-10 logarithm using the natural logarithm.
+ * 
+ * @tparam T The data type of the input.
+ * @param x The input value.
+ * @return The calculated base-10 logarithm.
+ */
 template <typename T>
 double log10(T x) {
   if (x < 0) {
@@ -186,6 +278,12 @@ double log10(T x) {
   return natural_log(x) / natural_log(10);
 }
 
+/**
+ * @brief Calculate the nth Fibonacci number.
+ * 
+ * @param n The index of the Fibonacci number to calculate.
+ * @return The calculated nth Fibonacci number.
+ */
 inline long int fibonacci(int n) {
   int a = 0, b = 1;
   for (int i = 2; i <= n; ++i) {
@@ -196,6 +294,12 @@ inline long int fibonacci(int n) {
   return b;
 }
 
+/**
+ * @brief Calculate the nth Bell number using dynamic programming.
+ * 
+ * @param n The index of the Bell number to calculate.
+ * @return The calculated nth Bell number.
+ */
 inline long long int bell_num(int n) {
   int bell[n + 1][n + 1];
   bell[0][0] = 1;
@@ -203,10 +307,12 @@ inline long long int bell_num(int n) {
   for (int i = 1; i <= n; ++i) {
     bell[i][0] = bell[i - 1][i - 1];
     for (int j = 1; j <= i; ++j) {
+      //  Calculate Bell numbers using previous values
       bell[i][j] = bell[i - 1][j - 1] + bell[i][j - 1];
     }
   }
-
+  
+  // return the calculated bell number
   return bell[n][0];
 }
 }  // namespace qadiriyah
