@@ -102,3 +102,13 @@ TEST(CovVecTest, VecOfFloat) {
     // the result
     EXPECT_EQ(expected, actual);
 }
+
+// testing Correlation
+TEST(CorrVecTest,VecOfFloat){
+  // this test not include of negative
+  std::vector<float> x = {1.0, 2.0, 3.0, 4.0};
+  std::vector<float> y = {2.0, 3.0, 4.0, 5.0};
+  float expected =1;
+  float actual =Correlation(x,y);
+  EXPECT_EQ(expected,actual);
+}
