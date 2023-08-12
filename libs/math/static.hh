@@ -1,11 +1,21 @@
 
 #include <algorithm>
 #include <vector>
-
+#include <iostream>
 #include "../math/math.hh"
 
 template <typename T>
 float mean(std::vector<T>& arr) {
+  /**
+   * Describe
+   * ----
+   * Mean is a measure of sum of vector value
+   * division by size of array
+   * 
+   * Params
+   * ----
+   * param arr is represents an input array of values
+  */
   float result = 0;
   for (int i = 0; i < arr.size(); ++i) {
     result += arr[i];
@@ -63,40 +73,97 @@ T _mode(std::vector<T>& arr) {
 }
 
 template <typename T>
-float variance(std::vector<T>& arr) {
-  float mean_values = mean(arr);
-  float result = 0;
+float variance(std::vector<T>& arr,int ddof=0) {
+  /**
+   * Describetion
+   * ---
+   * variance is a statical model for measure of dispresion,in
+   * other word it is a measure of how of a random variabel.
+   * variance can be impact to data distribution and skewness
+   * 
+   * Params
+   * ---
+   * param arr represents an input array of values
+   * param ddof indicates whether to calculate mode Population 
+   * or Sample.
+  */
+  float sum = 0;
   for (int i = 0; i < arr.size(); ++i) {
-    float diff = arr[i] - mean_values;
-    result += pow(diff, 2);
+    sum += qadiriyah:: power(arr[i]-mean(arr), 2);
   }
-  result /= arr.size();
-  return result;
+  return sum/(arr.size()-ddof);
 }
 
 template <typename T>
-float StandardDev(std::vector<T>& arr) {
-  float mean_value = mean(arr);
-  float result = 0;
+float StandardDev(std::vector<T>& arr,int ddof=0) {
+  /**
+   * Description
+   * ----
+   * Standard Deviation is measure how many individual data
+   * point is away from the mean of dataset.it's calculated
+   * using the formula
+   * 
+   * Params
+   * ---
+   * param arr is represents an input array of values
+   * param ddof indicates whether to calculate the mode for
+   * a population or sample.
+  */
+  float sum = 0;
   for (int i = 0; i < arr.size(); ++i) {
-    float diff = pow(arr[i] - mean_value, 2);
-    result += diff;
+    sum += qadiriyah:: power(arr[i] - mean(arr), 2);
   }
-  result /= arr.size();
-
-  return qadiriyah::square_value(result);
+  return qadiriyah::square_value(sum/(arr.size() - ddof));
 }
 
 template <typename T>
-float Covariance(std::vector<T>& arrX, std::vector<T>& arrY) {
-  float mean_x = mean(arrX);
-  float mean_y = mean(arrY);
+float Covariance(std::vector<T>& arrX,std::vector<T>& arrY,int ddof=0) {
+  /**
+   * Description
+   * ----
+   * Covariance is a measure similiar variability of two data independent.
+   * if Covariance more than 0 relation is strong,if else covariance less than 0 relation is weak
+   * else no have releation
+   * 
+   * Params
+   * ----
+   * param arrX is represents an input array of values
+   * param arrY is represents an input array of values
+   * param ddof indicates whether to calculate the mode for
+   * a population or sample.
+  */
+  if (arrX.size() != arrY.size()){
+    std::cerr<<"Size X and Y is not Same";
+  }
   float result = 0;
   for (int i = 0; i < arrX.size(); ++i) {
-    float diffX = (arrX[i] - mean_x);
-    float diffY = (arrY[i] - mean_y);
-    result += (diffX * diffY);
+    result += ((arrX[i] - mean(arrX)) * (arrY[i] - mean(arrY)));
   }
-  result /= arrX.size();
-  return result;
+  return result/(arrX.size()-ddof);
+}
+
+template <typename T>
+float Correlation(std::vector<T>& arrX,std::vector<T>& arrY){
+  /**
+   * Correlation is a statical relationship between each of
+   * data indepedent with data dependent.
+   * is same with Covariance if score is less than zero is weak
+   * relation,if else 0< score < 1 is strong else is no have relation
+   * Params
+   * ----
+   * param arrX is represents an input array of values
+   * param arrY is represents an input array of values
+   * param ddof indicates whether to calculate the mode for
+   * a population or sample.
+  */
+
+  // to check size arr X and arr Y is same
+
+  if(arrX.size()!=arrY.size()){
+    std::cerr<<"The Size is Not Same\n";
+  }
+  if (StandardDev(arrX) == 0 || StandardDev(arrY) == 0) {
+        return 0;  // Avoid division by zero
+  }
+  return Covariance(arrX,arrY)/(StandardDev(arrX) * StandardDev(arrY));
 }
