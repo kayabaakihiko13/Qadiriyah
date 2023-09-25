@@ -21,34 +21,34 @@ TEST(MeanVectTest, VectorOffloat) {
 }
 
 TEST(MedianVecTest, OddVectorOfInteger) {
-    // make vector unit testing
-    std::vector<int> numbers = {1, 2, 3, 4, 5};
+  // make vector unit testing
+  std::vector<int> numbers = {1, 2, 3, 4, 5};
 
-    // this line for expected value from that calculation
-    int expected = 3;
-    // this line what the output from the function
-    int actual = _median(numbers);
+  // this line for expected value from that calculation
+  int expected = 3;
+  // this line what the output from the function
+  int actual = _median(numbers);
 
-    EXPECT_EQ(expected, actual);
+  EXPECT_EQ(expected, actual);
 }
 
 TEST(MedianVecTest, EvenVectorOfFloat) {
   std::vector<float> numbers = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0};
-    // this line for expected value from that calculation.
-    float expected = 3.5;
-    // this line what the output from the function
-    float actual = static_cast<float>(_median(numbers));
+  // this line for expected value from that calculation.
+  float expected = 3.5;
+  // this line what the output from the function
+  float actual = static_cast<float>(_median(numbers));
 
   EXPECT_EQ(expected, actual);
 }
 
 TEST(ModeVecTest, VectorOfInteger) {
-    // make units test vector
-    std::vector<int> numbers = {1, 2, 2, 3, 4, 4, 4, 4, 5};
+  // make units test vector
+  std::vector<int> numbers = {1, 2, 2, 3, 4, 4, 4, 4, 5};
 
-    // this line for expeted value from Mode calculation
-    int expected = 4;
-    int actual = _mode(numbers);
+  // this line for expeted value from Mode calculation
+  int expected = 4;
+  int actual = _mode(numbers);
   EXPECT_EQ(expected, actual);
 }
 
@@ -82,33 +82,57 @@ TEST(VarVecTest, VecOfFloat) {
 }
 
 TEST(VarVecTest, VecOfNegativeNumber) {
-    // this line for unit test vakye for calculation Variation with
-    // include negative number in array variabel
-    std::vector<float> numbers = {1.0, -2.0, 3.0, 4.0};
-    // this line for expected value from that calculation.
-    float expected = 5.25;
-    // this line what the output from the function
-    float actual = variance(numbers);
-    EXPECT_EQ(expected, actual);
+  // this line for unit test vakye for calculation Variation with
+  // include negative number in array variabel
+  std::vector<float> numbers = {1.0, -2.0, 3.0, 4.0};
+  // this line for expected value from that calculation.
+  float expected = 5.25;
+  // this line what the output from the function
+  float actual = variance(numbers);
+  EXPECT_EQ(expected, actual);
 }
 
 TEST(CovVecTest, VecOfFloat) {
-    // this line for unit test value for Covariance Test
-    std::vector<float> x = {1.0, 2.0, 3.0, 4.0};
-    std::vector<float> y = {2.0, 3.0, 4.0, 5.0};
-    // this line expeted what the that calculation
-    float expected = 1.25;
-    float actual = Covariance(x, y);
-    // the result
-    EXPECT_EQ(expected, actual);
+  // this line for unit test value for Covariance Test
+  std::vector<float> x = {1.0, 2.0, 3.0, 4.0};
+  std::vector<float> y = {2.0, 3.0, 4.0, 5.0};
+  // this line expeted what the that calculation
+  float expected = 1.25;
+  float actual = Covariance(x, y);
+  // the result
+  EXPECT_EQ(expected, actual);
 }
 
 // testing Correlation
-TEST(CorrVecTest,VecOfFloat){
+TEST(CorrVecTest, VecOfFloat) {
   // this test not include of negative
   std::vector<float> x = {1.0, 2.0, 3.0, 4.0};
   std::vector<float> y = {2.0, 3.0, 4.0, 5.0};
-  float expected =1;
-  float actual =Correlation(x,y);
-  EXPECT_EQ(expected,actual);
+  float expected = 1;
+  float actual = Correlation(x, y);
+  EXPECT_EQ(expected, actual);
+}
+
+// Testing Quantile
+TEST(QuantileVecTest, VectOfOdd) {
+  // this test not include of negative value
+  std::vector<float> x = {1.0, 2.0, 30.0};
+  float expeted = 16.0;
+  float actual = Quantile(x, .75);
+  EXPECT_EQ(expeted, actual);
+}
+
+TEST(QuantileVecTest, VecOfEven) {
+  std::vector<float> x = {1.0, 2.0, 3.0, 30.0};
+  float expeted = 1.75;
+  float actual = Quantile(x, .25);
+  EXPECT_EQ(expeted, actual);
+}
+
+// Test what if vector include blank
+TEST(QuantileVecTest, VectOfBlank) {
+  std::vector<float> x = {};
+  float expeted = {};
+  float actual = Quantile(x, .25);
+  EXPECT_EQ(expeted, actual);
 }
