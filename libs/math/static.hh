@@ -1,16 +1,10 @@
 
 #include <algorithm>
-#include <vector>
 #include <iostream>
+#include <vector>
+
 #include "../math/math.hh"
 
-/**
- * @brief Calculate the mean (average) of a vector of values.
- * 
- * @tparam T The data type of the values.
- * @param arr The vector of values.
- * @return The calculated mean.
- */
 template <typename T>
 float mean(std::vector<T>& arr) {
   /**
@@ -18,28 +12,20 @@ float mean(std::vector<T>& arr) {
    * ----
    * Mean is a measure of sum of vector value
    * division by size of array
-   * 
+   *
    * Params
    * ----
    * param arr is represents an input array of values
-  */
+   */
   float result = 0;
   for (int i = 0; i < arr.size(); ++i) {
-    // sum up all values
     result += arr[i];
   }
-  // divide by the number of values to get the mean
   result /= arr.size();
   return result;
 }
 
-/**
- * @brief Calculate the median of a vector of values.
- * 
- * @tparam T The data type of the values.
- * @param arr The vector of values.
- * @return The calculated median.
- */
+// median
 template <typename T>
 T _median(std::vector<T>& arr) {
   // sort value in vector from smallest to biggest
@@ -59,14 +45,7 @@ T _median(std::vector<T>& arr) {
     return result;
   }
 }
-
-/**
- * @brief Calculate the mode (most frequent value) of a vector of values.
- * 
- * @tparam T The data type of the values.
- * @param arr The vector of values.
- * @return The calculated mode.
- */
+//
 template <typename T>
 T _mode(std::vector<T>& arr) {
   // sorrting from smallest to biggest
@@ -82,9 +61,7 @@ T _mode(std::vector<T>& arr) {
 
       // Check if the current element has a higher count than the maximum element
       if (current_count > max_count) {
-        // Update max_count if current_count is larger
         max_count = current_count;
-        // Update max_element with the current element
         max_element = arr[i];
       }
     } else {
@@ -92,104 +69,82 @@ T _mode(std::vector<T>& arr) {
       current_count = 1;
     }
   }
-  // areturn the mode
+
   return max_element;
 }
 
-/**
- * @brief Calculate the variance of a vector of values.
- * 
- * @tparam T The data type of the values.
- * @param arr The vector of values.
- * @return The calculated variance.
- */
 template <typename T>
-float variance(std::vector<T>& arr,int ddof=0) {
+float variance(std::vector<T>& arr, int ddof = 0) {
   /**
    * Describetion
    * ---
    * variance is a statical model for measure of dispresion,in
    * other word it is a measure of how of a random variabel.
    * variance can be impact to data distribution and skewness
-   * 
+   *
    * Params
    * ---
    * param arr represents an input array of values
-   * param ddof indicates whether to calculate mode Population 
+   * param ddof indicates whether to calculate mode Population
    * or Sample.
-  */
+   */
   float sum = 0;
   for (int i = 0; i < arr.size(); ++i) {
-    sum += qadiriyah:: power(arr[i]-mean(arr), 2);
+    sum += qadiriyah::power(arr[i] - mean(arr), 2);
   }
-  return sum/(arr.size()-ddof);
+  return sum / (arr.size() - ddof);
 }
 
-/**
- * @brief Calculate the standard deviation of a vector of values.
- * 
- * @tparam T The data type of the values.
- * @param arr The vector of values.
- * @return The calculated standard deviation.
- */
 template <typename T>
-float StandardDev(std::vector<T>& arr,int ddof=0) {
+float StandardDev(std::vector<T>& arr, int ddof = 0) {
   /**
    * Description
    * ----
    * Standard Deviation is measure how many individual data
    * point is away from the mean of dataset.it's calculated
    * using the formula
-   * 
+   *
    * Params
    * ---
    * param arr is represents an input array of values
    * param ddof indicates whether to calculate the mode for
    * a population or sample.
-  */
+   */
   float sum = 0;
   for (int i = 0; i < arr.size(); ++i) {
-    sum += qadiriyah:: power(arr[i] - mean(arr), 2);
+    sum += qadiriyah::power(arr[i] - mean(arr), 2);
   }
-  return qadiriyah::square_value(sum/(arr.size() - ddof));
+  return qadiriyah::square_value(sum / (arr.size() - ddof));
 }
 
-/**
- * @brief Calculate the covariance between two vectors of values.
- * 
- * @tparam T The data type of the values.
- * @param arrX The first vector of values.
- * @param arrY The second vector of values.
- * @return The calculated covariance.
- */
 template <typename T>
-float Covariance(std::vector<T>& arrX,std::vector<T>& arrY,int ddof=0) {
+float Covariance(std::vector<T>& arrX, std::vector<T>& arrY, int ddof = 0) {
   /**
    * Description
    * ----
    * Covariance is a measure similiar variability of two data independent.
    * if Covariance more than 0 relation is strong,if else covariance less than 0 relation is weak
    * else no have releation
-   * 
+   *
    * Params
    * ----
    * param arrX is represents an input array of values
    * param arrY is represents an input array of values
    * param ddof indicates whether to calculate the mode for
    * a population or sample.
-  */
-  if (arrX.size() != arrY.size()){
-    std::cerr<<"Size X and Y is not Same";
+   */
+  if (arrX.size() != arrY.size()) {
+    std::cerr << "Size X and Y is not Same";
   }
   float result = 0;
   for (int i = 0; i < arrX.size(); ++i) {
     result += ((arrX[i] - mean(arrX)) * (arrY[i] - mean(arrY)));
   }
-  return result/(arrX.size()-ddof);
+  return result / (arrX.size() - ddof);
 }
 
 template <typename T>
-float Correlation(std::vector<T>& arrX,std::vector<T>& arrY){
+float Correlation(std::vector<T>& arrX, std::vector<T>& arrY) {
   /**
    * Correlation is a statical relationship between each of
    * data indepedent with data dependent.
@@ -201,15 +156,52 @@ float Correlation(std::vector<T>& arrX,std::vector<T>& arrY){
    * param arrY is represents an input array of values
    * param ddof indicates whether to calculate the mode for
    * a population or sample.
-  */
+   */
 
   // to check size arr X and arr Y is same
 
-  if(arrX.size()!=arrY.size()){
-    std::cerr<<"The Size is Not Same\n";
+  if (arrX.size() != arrY.size()) {
+    std::cerr << "The Size is Not Same\n";
   }
   if (StandardDev(arrX) == 0 || StandardDev(arrY) == 0) {
-        return 0;  // Avoid division by zero
+    return 0;  // Avoid division by zero
   }
-  return Covariance(arrX,arrY)/(StandardDev(arrX) * StandardDev(arrY));
+  return Covariance(arrX, arrY) / (StandardDev(arrX) * StandardDev(arrY));
+}
+
+template <typename T>
+static inline double Lerp(T v0, T v1, T t) {
+  return v0 + t * (v1 - v0);
+}
+
+template <typename T>
+T Quantile(const std::vector<T>& arr, const float& prob) {
+  /**
+   * @brief Quantile is a point in a distribution that relate
+   * to the rank order of values in that distribution
+   * @param arr this a input value form by array in 1D
+   * @param prob this input about value probility yout input
+   */
+  // if prob value greates more 100 and lower more  zero
+  if (prob < 0 || prob >= 100) {
+    std::cerr << "Value can't more than 100 or lower than 0";
+  }
+  // if condition arr is empty of blank
+  if (arr.empty()) {
+    return T();
+  }
+  // this conditional when size array is 1
+  if (1 == arr.size()) {
+    return arr[0];
+  }
+  // Calculate the index of desired percentile
+  float index = prob * (arr.size() - 1);
+  if (index == floor(index)) {
+    return arr[static_cast<int>(index)];
+  } else {
+    int lowerIndex = static_cast<int>(floor(index));
+    int uppIndex = static_cast<int>(ceil(index));
+    float fraction = index - lowerIndex;
+    return Lerp(arr[lowerIndex], arr[uppIndex], fraction);
+  }
 }
